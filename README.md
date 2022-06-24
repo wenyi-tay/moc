@@ -10,13 +10,13 @@ We use the Yelp summarisation dataset in the Meansum paper. It consists of 200 b
 
 ## Systems
 
-Bertcent- We used the published outputs of the system. https://github.com/rktamplayo/PlanSum/tree/master/output
-Copycat- We used the published outputs of the system. https://github.com/abrazinskas/Copycat-abstractive-opinion-summarizer/tree/master/copycat/artifacts
-Denoisesum- We used the published outputs of the system. https://github.com/rktamplayo/DenoiseSum/tree/master/output
-Fewsum- We used the published outputs of the system. https://github.com/abrazinskas/FewSum/tree/master/artifacts
-Meansum- We used the published code to run Meansum. https://github.com/sosuperic/MeanSum
-Opiniondigest- We used the published code to run Meansum. https://github.com/megagonlabs/opiniondigest
-Plansum- We used the published outputs of the system. https://github.com/rktamplayo/PlanSum/tree/master/output
+* Bertcent- We used the published outputs of the system. https://github.com/rktamplayo/PlanSum/tree/master/output
+* Copycat- We used the published outputs of the system. https://github.com/abrazinskas/Copycat-abstractive-opinion-summarizer/tree/master/copycat/artifacts
+* Denoisesum- We used the published outputs of the system. https://github.com/rktamplayo/DenoiseSum/tree/master/output
+* Fewsum- We used the published outputs of the system. https://github.com/abrazinskas/FewSum/tree/master/artifacts
+* Meansum- We used the published code to run Meansum. https://github.com/sosuperic/MeanSum
+* Opiniondigest- We used the published code to run Meansum. https://github.com/megagonlabs/opiniondigest
+* Plansum- We used the published outputs of the system. https://github.com/rktamplayo/PlanSum/tree/master/output
 
 
 ## Fine-tuning Dataset
