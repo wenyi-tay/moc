@@ -1,6 +1,6 @@
-# new_metric
+# Metric for Opinion Consistency
 
-Problem: Review summary evaluation for opinion coherence
+Problem: Review summary evaluation for opinion cosistency
 
 Why it is an important problem to solve: We found that 8-20% of the abstractively generated summaries contain contrasting opinions. Contrasting opinions are opinions about the same aspect but opposite in sentiment polarity. For example, the service is good and the service is horrible. This happens within the same summary. 
 
