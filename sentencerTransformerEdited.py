@@ -34,6 +34,7 @@ from sentence_transformers.util import import_from_string, batch_to_device, full
 from sentence_transformers.models import Transformer, Pooling, Dense
 from sentence_transformers.model_card_templates import ModelCardTemplate
 from sentence_transformers import __version__
+from sentence_transformers import SentenceTransformer
 
 logger = logging.getLogger(__name__)
 
