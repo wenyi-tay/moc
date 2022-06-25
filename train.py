@@ -25,8 +25,24 @@ from evaluator import *
 from sentencerTransformerEdited import *
 
 import sys
-print('cmd entry:', sys.argv)
 
+for i in range(1, len(sys.argv)):
+    print('argument:', i, 'value:', sys.argv[i])
+
+
+
+
+# Read the dataset
+model_name = 'all-MiniLM-L6-v2'
+train_batch_size = sys.argv[1] #The larger you select this, the better the results (usually). But it requires more GPU memory
+num_epochs = sys.argv[2] 
+num_biz = "28000"
+num_examples = 1
+my_margin = sys.argv[3] 
+my_temperature = sys.argv[4] #multiply by 0.01
+my_alpha = sys.argv[5]  #multiply by 0.001
+learning_rate = sys.argv[6] # multiply by 0.000001
+num_run = 1
 
 logging.basicConfig(format='%(asctime)s - %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
@@ -35,17 +51,6 @@ logging.basicConfig(format='%(asctime)s - %(message)s',
 logger = logging.getLogger(__name__)
 #### /print debug information to stdout
 
-# Read the dataset
-model_name = 'all-MiniLM-L6-v2'
-train_batch_size = 32
-num_epochs = 5
-num_biz = "28000"
-num_examples = 1
-my_margin = 3
-my_temperature = 30 #multiply by 0.01
-my_alpha = 20 #multiply by 0.001
-num_run = 1
-learning_rate = 2 # multiply by 0.000001
 if my_alpha == 0:
   print("Using Triplet Loss")
   model_save_path = "output/training_tripletloss_" + str(num_biz) + "sentences_"  + str(num_examples) +"examples" + str(my_margin) + "margin" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name
