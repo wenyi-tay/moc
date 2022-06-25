@@ -11,6 +11,7 @@ from torch import nn, Tensor
 from typing import Union, Tuple, List, Iterable, Dict
 import torch.nn.functional as F
 from enum import Enum
+from sentence_transformers import SentenceTransformer
 
 class TripletDistanceMetric(Enum):
     """
