@@ -5,11 +5,6 @@ Created on Sat Jun 25 10:15:44 2022
 @author: S3642603
 """
 
-"""
-This script trains sentence transformers with a triplet loss function.
-As corpus, we use the wikipedia sections dataset that was describd by Dor et al., 2018, Learning Thematic Similarity Metric Using Triplet Networks.
-"""
-
 from sentence_transformers import SentenceTransformer, InputExample, LoggingHandler, losses, models, util
 from torch.utils.data import DataLoader
 from sentence_transformers.evaluation import TripletEvaluator
@@ -30,8 +25,6 @@ for i in range(1, len(sys.argv)):
     print('argument:', i, 'value:', sys.argv[i])
 
 
-
-
 # Read the dataset
 model_name = 'all-MiniLM-L6-v2'
 train_batch_size = int(sys.argv[1]) #The larger you select this, the better the results (usually). But it requires more GPU memory
@@ -42,6 +35,8 @@ my_margin = int(sys.argv[3])
 my_temperature = int(sys.argv[4]) #multiply by 0.01
 my_alpha = int(sys.argv[5])  #multiply by 0.001
 learning_rate = int(sys.argv[6]) # multiply by 0.000001
+fname_train = str(sys.argv[7])  #multiply by 0.001
+fname_dev = str(sys.argv[8]) # multiply by 0.000001
 num_run = 1
 
 logging.basicConfig(format='%(asctime)s - %(message)s',
@@ -62,24 +57,21 @@ else:
 model = SentenceTransformerWenyi(model_name)
 
 
-logger.info("Read Yelp Pair train dataset")
+## read the training dataset
+logger.info("Read Yelp Train Dataset")
 train_examples_setA = []
-with open("/content/drive/MyDrive/data/yelp_triplets_28000sentences_clean_" +str(num_examples) + "examples_train.csv", encoding="utf-8") as fIn:
-# with open("/content/drive/MyDrive/data/yelp_triplets_sentences_1examples_subset1.csv", encoding="utf-8") as fIn:
+with open(fname_train, encoding="utf-8") as fIn:
     reader = csv.DictReader(fIn)
     for row in reader:
-      # print(row)
-      # train_examples_setA.append(InputExample(texts=[row['sent1'], row['sent2'], row["sent3"]], label = int(row['label'])))
       train_examples_setA.append(InputExample(texts=[row['sent1'], row['sent2'], row["sent3"]], label = int(row['biz1_type_first_clean_label'])))
-      
-      
-logger.info("Read Yelp Pair dev dataset")
+
+    
+## read the development dataset    
+logger.info("Read Yelp Dev Dataset")
 dev_examples_setA = []
-with open("/content/drive/MyDrive/data/yelp_triplets_4000sentences_clean_" + str(num_examples) + "examples_dev.csv", encoding="utf-8") as fIn:
-# with open("/content/drive/MyDrive/data/yelp_triplets_sentences_1examples_subset2.csv", encoding="utf-8") as fIn:
+with open(fname_dev, encoding="utf-8") as fIn:
     reader = csv.DictReader(fIn)
     for row in reader:
-        # dev_examples_setA.append(InputExample(texts=[row['sent1'], row['sent2'], row["sent3"]], label = int(row['label'])))
         dev_examples_setA.append(InputExample(texts=[row['sent1'], row['sent2'], row["sent3"]], label = int(row['biz1_type_first_clean_label'])))
         
         
@@ -117,7 +109,7 @@ print(warmup_steps)
 
 # Train the model
 learning_rate = learning_rate * 0.000001 
-print("Learning rate: " + str(learning_rate))
+# print("Learning rate: " + str(learning_rate))
 
 
 train_objectives = [(train_dataloader_setA, train_loss_setA)]
@@ -127,15 +119,11 @@ model.fit(train_objectives=train_objectives,
           evaluation_steps=500,
           warmup_steps=warmup_steps,
           optimizer_params= {'lr': learning_rate},
-          output_path=model_save_path)
-
-
-
+          output_path=model_save_path) 
       
       
       
-      
-      
+## end
       
       
       
