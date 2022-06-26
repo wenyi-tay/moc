@@ -94,13 +94,11 @@ logger.info("Setting the Evaluator")
 if my_alpha == 0:
   print("Using Triplet Loss")
   evaluator = TripletEvaluator.from_input_examples(dev_examples_setA, 
-                                                   name = "tripletloss_" + str(num_biz) + "sentences_"  + str(my_margin) + "margin" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name,
-                                                   triplet_margin = my_margin)
+                                                   name = "tripletloss_" + str(num_biz) + "sentences_"  + str(my_margin) + "margin" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name)
 else:
   print("Using Supervised Triplet Loss")
   evaluator = TripletEvaluator.from_input_examples(dev_examples_setA, 
-                                                   name = "supervisedtripletloss_" + str(num_biz) + "sentences_"  + str(num_examples) +"examples" + str(my_margin) + "margin" + str(my_temperature)+"temp" +str(my_alpha)+ "alpha" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name,
-                                                   triplet_margin = my_margin)
+                                                   name = "supervisedtripletloss_" + str(num_biz) + "sentences_"  + str(num_examples) +"examples" + str(my_margin) + "margin" + str(my_temperature)+"temp" +str(my_alpha)+ "alpha" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name)
 
 warmup_steps = int(len(train_dataloader_setA) * num_epochs * 0.1) #10% of train data
 print(warmup_steps)
