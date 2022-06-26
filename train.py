@@ -21,22 +21,22 @@ from sentencerTransformerEdited import *
 
 import sys
 
-for i in range(1, len(sys.argv)):
-    print('argument:', i, 'value:', sys.argv[i])
+#for i in range(1, len(sys.argv)):
+#    print('argument:', i, 'value:', sys.argv[i])
 
 
 # Read the dataset
 model_name = 'all-MiniLM-L6-v2'
 train_batch_size = int(sys.argv[1]) #The larger you select this, the better the results (usually). But it requires more GPU memory
 num_epochs = int(sys.argv[2])
-num_biz = "28000"
-num_examples = 1
 my_margin = int(sys.argv[3])
 my_temperature = int(sys.argv[4]) #multiply by 0.01
 my_alpha = int(sys.argv[5])  #multiply by 0.001
 learning_rate = int(sys.argv[6]) # multiply by 0.000001
 fname_train = str(sys.argv[7])  #multiply by 0.001
 fname_dev = str(sys.argv[8]) # multiply by 0.000001
+num_biz = "28000"
+num_examples = 1
 num_run = 1
 
 logging.basicConfig(format='%(asctime)s - %(message)s',
