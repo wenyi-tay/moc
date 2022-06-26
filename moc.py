@@ -15,14 +15,12 @@ from sentence_transformers import SentenceTransformer, util
 import re
 import matplotlib.pyplot as plt
 import seaborn as sns
+import sys
 
 
 
-f_name = "80000sentences_1examples5margin7temp1alpha3epochs32batch1run_all-MiniLM-L6-v2"
-encoder = SentenceTransformer("/content/drive/My Drive/SOS_Triplet_Yelp/training_triplet_" + f_name )
 
-
-def global_coherence_sos(summary, inspect = False, k = 1): 
+def global_coherence_sos(summary, encoder, inspect = False, k = 1): 
   ## input:
   ### (1) summary: string, the summary to be evaluated
   ### (2) inspect: bool, to show a visualisation of the score, provide the sentence with lowest avg similarity
