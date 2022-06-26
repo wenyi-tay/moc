@@ -5,13 +5,13 @@ Created on Sat Jun 25 09:33:00 2022
 @author: S3642603
 """
 
-from torch.types import Device
 import torch
 from torch import nn, Tensor
-from typing import Union, Tuple, List, Iterable, Dict
+from typing import Iterable, Dict
 import torch.nn.functional as F
 from enum import Enum
 from sentence_transformers import SentenceTransformer
+
 
 class TripletDistanceMetric(Enum):
     """
@@ -91,7 +91,7 @@ class SupervisedTripletLoss(nn.Module):
 
         contrast_feature = rep
         anchor_feature = rep
-        anchor_count = 2 ## we have two views
+        # anchor_count = 2 ## we have two views
 
         # compute logits
         anchor_dot_contrast = torch.div(

@@ -620,8 +620,6 @@ class SentenceTransformerWenyi(nn.Sequential):
         :param checkpoint_save_total_limit: Total number of checkpoints to store
         """
 
-        #print("Wenyi added this!")
-        #print("I am in the fit function of Wenyi's sentence transformer")
 
         ##Add info to model card
         #info_loss_functions = "\n".join(["- {} with {} training examples".format(str(loss), len(dataloader)) for dataloader, loss in train_objectives])
