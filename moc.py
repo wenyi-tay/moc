@@ -18,16 +18,19 @@ import seaborn as sns
 import sys
 
 
-
+encoder = SentenceTransformer("all-MiniLM-L6-v2")
 
 def global_coherence_sos(summary, encoder, inspect = False, k = 1): 
   ## input:
   ### (1) summary: string, the summary to be evaluated
-  ### (2) inspect: bool, to show a visualisation of the score, provide the sentence with lowest avg similarity
-  ### (3) k: int, for inspection of k sentences with lowest similarity scores. Deafult is 1
+  ### (2) encoder: the sentence transformer model
+  ### (3) inspect: bool, to show a visualisation of the score, provide the sentence with lowest avg similarity
+  ### (4) k: int, for inspection of k sentences with lowest similarity scores. Deafult is 1
   ## output: 
   ### (1) tuple of aggregation by mean, min, max
 
+
+        
   ## sent tokenise first
   summary = re.sub('[.]+', '.', summary)
   list_sent = sent_tokenize(summary)
