@@ -15,10 +15,10 @@ from sentence_transformers import SentenceTransformer, util
 import re
 import matplotlib.pyplot as plt
 import seaborn as sns
-import sys
 
 
 encoder = SentenceTransformer("all-MiniLM-L6-v2")
+
 
 def global_coherence_sos(summary, encoder, inspect = False, k = 1): 
   ## input:
@@ -28,8 +28,6 @@ def global_coherence_sos(summary, encoder, inspect = False, k = 1):
   ### (4) k: int, for inspection of k sentences with lowest similarity scores. Deafult is 1
   ## output: 
   ### (1) tuple of aggregation by mean, min, max
-
-
         
   ## sent tokenise first
   summary = re.sub('[.]+', '.', summary)
@@ -81,7 +79,7 @@ def inspect_summary(list_sent, cosine_scores, k = 1):
   lower_triang_df = np.where(np.tril(np.ones(cosine_scores.shape)).astype(bool),cosine_scores,np.nan)
 
   ## plot the similarity matrix
-  pp = sns.heatmap(lower_triang_df)
+  pp = sns.heatmap(lower_triang_df, annot=True)
   ticks = list(range(cosine_scores.shape[0]))
   ticks = ["S" + str(t) for t in ticks]
 
