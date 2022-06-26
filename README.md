@@ -6,7 +6,9 @@ Why it is an important problem to solve: We found that 8-20% of the abstractivel
 
 ## Test Dataset
 
-We use the Yelp summarisation dataset in the Meansum paper. It consists of 200 businesses, 8 reviews and 200 human written summaries. The dataset can be obtained from https://github.com/sosuperic/MeanSum. The dataset is split into a development set and test set of 100 businesses each. We report the results on the test set only. We use the development set only if the metrics require tuning. 
+We use the Yelp summarisation dataset in the Meansum paper. It consists of 200 businesses, 8 reviews and 200 human written summaries. The dataset can be obtained from https://github.com/sosuperic/MeanSum. The dataset is split into a development set and test set of 100 businesses each. We report the results on the test set only. 
+
+We also use the Amazon summarisation dataset from the Copycat paper. It consists of 60 products, 8 reviews and 3 human written summaries per product. The dataset can be obtained from https://github.com/abrazinskas/Copycat-abstractive-opinion-summarizer/. The dataset is split into 28 development and 32 test. We report the results on the test set only. 
 
 ## Systems
 
@@ -21,6 +23,6 @@ We use the Yelp summarisation dataset in the Meansum paper. It consists of 200 b
 
 ## Fine-tuning Dataset
 
-We use Yelp Academic Dataset to create the fine-tuning datasets. 
+We use Yelp Academic Dataset to create the fine-tuning datasets. We train our encoder with a supervised triplet loss objective. The triplet can be at review level or sentence level. The review level triplet is anchor review, positive review (a review of the same product and same sentiment polarity) and negative review ( a review of same product but different sentiment polarity). The triplet we use at sentence level is anchor sentence, positive sentence (a sentence in the same review) and negative sentence (a sentence from another review of the same product). 
 
 
