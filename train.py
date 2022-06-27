@@ -57,7 +57,10 @@ train_examples_setA = []
 with open(fname_train, encoding="utf-8") as fIn:
     reader = csv.DictReader(fIn)
     for row in reader:
-      train_examples_setA.append(InputExample(texts=[row['sent1'], row['sent2'], row["sent3"]], label = int(row['biz1_type_first_clean_label'])))
+      train_examples_setA.append(InputExample(texts=[row['anchor'], 
+                                                     row['positive'], 
+                                                     row["negative"]], 
+                                              label = int(row['label'])))
 
     
 ## read the development dataset    
@@ -66,7 +69,10 @@ dev_examples_setA = []
 with open(fname_dev, encoding="utf-8") as fIn:
     reader = csv.DictReader(fIn)
     for row in reader:
-        dev_examples_setA.append(InputExample(texts=[row['sent1'], row['sent2'], row["sent3"]], label = int(row['biz1_type_first_clean_label'])))
+        dev_examples_setA.append(InputExample(texts=[row['anchor'], 
+                                                     row['positive'], 
+                                                     row["negative"]], 
+                                              label = int(row['label'])))
         
 logger.info("Set Dataloader")   
 train_dataloader_setA = DataLoader(train_examples_setA, shuffle=True, batch_size=train_batch_size)
