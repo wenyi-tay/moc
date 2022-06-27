@@ -20,14 +20,15 @@ import sys
 
 # Read the dataset
 model_name = 'all-MiniLM-L6-v2'
-train_batch_size = int(sys.argv[1]) #The larger you select this, the better the results (usually). But it requires more GPU memory
-num_epochs = int(sys.argv[2])
-my_margin = int(sys.argv[3])
-my_temperature = int(sys.argv[4]) #multiply by 0.01
-my_alpha = int(sys.argv[5])  #multiply by 0.001
-learning_rate = int(sys.argv[6]) # multiply by 0.000001
-fname_train = str(sys.argv[7])  #multiply by 0.001
-fname_dev = str(sys.argv[8]) # multiply by 0.000001
+triplet_type = str(sys.argv[1]) # either review or sentence
+train_batch_size = int(sys.argv[2]) #The larger you select this, the better the results (usually). But it requires more GPU memory
+num_epochs = int(sys.argv[3])
+my_margin = int(sys.argv[4])
+my_temperature = int(sys.argv[5]) #multiply by 0.01
+my_alpha = int(sys.argv[6])  #multiply by 0.001
+learning_rate = int(sys.argv[7]) # multiply by 0.000001
+fname_train = str(sys.argv[8])  #multiply by 0.001
+fname_dev = str(sys.argv[9]) # multiply by 0.000001
 num_run = 1
 
 logging.basicConfig(format='%(asctime)s - %(message)s',
@@ -41,10 +42,10 @@ logger = logging.getLogger(__name__)
 print("Which loss am I using?")
 if my_alpha == 0:
   print("Using Triplet Loss")
-  model_save_path = "output/training_tripletloss_sentences_" + str(my_margin) + "margin" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name
+  model_save_path = "output/training_tripletloss_" + triplet_type + "_" + str(my_margin) + "margin" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name
 else:
   print("Using Supervised Triplet Loss")
-  model_save_path = "output/training_supervisedtripletloss_sentences_" + str(my_margin) + "margin" + str(my_temperature)+"temp" +str(my_alpha)+ "alpha" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name
+  model_save_path = "output/training_supervisedtripletloss_" + triplet_type + "_" + str(my_margin) + "margin" + str(my_temperature)+"temp" +str(my_alpha)+ "alpha" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name
 
 
 model = SentenceTransformerWenyi(model_name)
@@ -86,10 +87,10 @@ else:
 logger.info("Set Evaluator")
 if my_alpha == 0:
   evaluator = TripletEvaluator.from_input_examples(dev_examples_setA, 
-                                                   name = "tripletloss_sentences_"  + str(my_margin) + "margin" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name)
+                                                   name = "tripletloss_" + triplet_type + "_"  + str(my_margin) + "margin" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name)
 else:
   evaluator = TripletEvaluator.from_input_examples(dev_examples_setA, 
-                                                   name = "supervisedtripletloss_sentences_" + str(my_margin) + "margin" + str(my_temperature)+"temp" +str(my_alpha)+ "alpha" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name)
+                                                   name = "supervisedtripletloss_" + triplet_type + "_" + str(my_margin) + "margin" + str(my_temperature)+"temp" +str(my_alpha)+ "alpha" + str(num_epochs) + "epochs" + str(train_batch_size) + "batch" + str(learning_rate) + "lr" + "ReducedLabels" + str(num_run) + "run_" + model_name)
 
 warmup_steps = int(len(train_dataloader_setA) * num_epochs * 0.1) #10% of train data
 print(warmup_steps)
@@ -109,7 +110,6 @@ model.fit(train_objectives=train_objectives,
           warmup_steps=warmup_steps,
           optimizer_params= {'lr': learning_rate},
           output_path=model_save_path) 
-      
       
       
 ## end
