@@ -17,7 +17,7 @@ We also use the Amazon summarisation dataset from the Copycat paper. It consists
 * Denoisesum- We used the published outputs of the system. https://github.com/rktamplayo/DenoiseSum/tree/master/output
 * Fewsum- We used the published outputs of the system. https://github.com/abrazinskas/FewSum/tree/master/artifacts
 * Meansum- We used the published code to run Meansum. https://github.com/sosuperic/MeanSum
-* Opiniondigest- We used the published code to run Meansum. https://github.com/megagonlabs/opiniondigest
+* Opiniondigest- We used the published code to run Opiniondigest https://github.com/megagonlabs/opiniondigest
 * Plansum- We used the published outputs of the system. https://github.com/rktamplayo/PlanSum/tree/master/output
 
 
