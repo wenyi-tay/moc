@@ -37,3 +37,10 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# Exclude files in the following folders
+/data/published system summaries/
+/data/raw annotations/
+
+# Exclude this particular python code
+/code/Process all raw annotation files- do not commit.ipynb
